@@ -1,14 +1,15 @@
 class Component {
 
   // Attributes
-  int id;
-  int vehicleId;
-  String name;
-  String iconURL;
-  int mileageLifeSpan;
+  int id;  //
+  int vehicleId;  // Vehicle's id for relation between objects
+  String name;  // Name for the component
+  String iconURL;  // URL to icon
+  int startMileage; //Mileage the vehicle had when component added
+  int mileageLifespan; // Mileage expected before component needs change
 
   // Constructor
-  Component({this.id, this.vehicleId, this.name, this.iconURL, this.mileageLifeSpan});
+  Component({this.id, this.vehicleId, this.name, this.iconURL, this.startMileage, this.mileageLifespan});
 
   // Methods
   Map<String, dynamic> toMap(){
@@ -16,7 +17,8 @@ class Component {
       "vehicleId": vehicleId,
       "name": name,
       "iconURL": iconURL,
-      "mileageLifeSpan": mileageLifeSpan,
+      "startMileage": startMileage,
+      "mileageLifespan": mileageLifespan,
     };
 
     if(id != null) {
@@ -31,6 +33,7 @@ class Component {
     vehicleId = map["vehicleId"];
     name = map["name"];
     iconURL = map["iconURL"];
-    mileageLifeSpan = map["mileageLifeSpan"];
+    startMileage = map["startMileage"];
+    mileageLifespan = map["mileageLifespan"];
   }
 }

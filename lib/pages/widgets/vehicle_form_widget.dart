@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_bike/db_manager.dart';
 import 'package:my_bike/models/vehicle.dart';
-import 'package:validators/validators.dart';
 
 
 class VehicleInputWidget extends StatelessWidget {
@@ -67,6 +66,7 @@ class _InputFormState extends State<InputForm> {
             color: Colors.blueGrey[900],
           ),
           decoration: InputDecoration(
+              prefixIcon: Icon(Icons.settings, color: Colors.blueGrey),
               border: InputBorder.none,
               labelText: "Model",
               labelStyle: TextStyle(
@@ -101,6 +101,7 @@ class _InputFormState extends State<InputForm> {
             color: Colors.blueGrey[900],
           ),
         decoration: InputDecoration(
+          prefixIcon: Icon(Icons.label, color: Colors.blueGrey),
             border: InputBorder.none,
             labelText: "Name",
           labelStyle: TextStyle(
@@ -117,6 +118,126 @@ class _InputFormState extends State<InputForm> {
     _vehicle["name"] = value;
     },
     ),),);
+  }
+
+  Widget _buildIconURLField2() {
+    return Container(
+      margin: EdgeInsets.only(top: 5, bottom: 5),
+      decoration: BoxDecoration(
+        color: Colors.blueGrey[100],
+        borderRadius: new BorderRadius.circular(10.0),
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(left: 15, right: 15, top: 2, bottom: 2),
+        child: DropdownButtonFormField(
+
+          decoration: InputDecoration(
+            prefixIcon: Icon(Icons.add_photo_alternate, color: Colors.blueGrey),
+            // prefixIcon: Icon(Icons.insert_emoticon),
+            border: InputBorder.none,
+            labelText: "Vehicle icon",
+            labelStyle: TextStyle(
+                color: Colors.blueGrey[600]
+            ),
+          ),
+          iconSize: 0,
+          dropdownColor: Colors.blueGrey[50],
+          items: [
+
+            DropdownMenuItem(
+                child: Center(
+                  child: Image(
+                    image: AssetImage("images/icons/vehicles/classic_bike_1.png"),
+                    width: 80,
+                  ),
+                ),
+                value: "images/icons/vehicles/classic_bike_1.png"
+            ),
+
+            DropdownMenuItem(
+                child: Center(
+                  child: Image(
+                    image: AssetImage("images/icons/vehicles/classic_bike_2.png"),
+                    width: 80,
+                  ),
+                ),
+                value: "images/icons/vehicles/classic_bike_2.png"
+            ),
+
+            DropdownMenuItem(
+                child: Center(
+                  child: Image(
+                    image: AssetImage("images/icons/vehicles/small_scooter_1.png"),
+                    width: 80,
+                  ),
+                ),
+                value: "images/icons/vehicles/small_scooter_1.png"
+            ),
+
+            DropdownMenuItem(
+                child: Center(
+                  child: Image(
+                    image: AssetImage("images/icons/vehicles/small_scooter_2.png"),
+                    width: 80,
+                  ),
+                ),
+                value: "images/icons/vehicles/small_scooter_2.png"
+            ),
+
+            DropdownMenuItem(
+                child: Center(
+                  child: Image(
+                    image: AssetImage("images/icons/vehicles/sports_bike_1.png"),
+                    width: 80,
+                  ),
+                ),
+                value: "images/icons/vehicles/sports_bike_1.png"
+            ),
+
+            DropdownMenuItem(
+                child: Center(
+                  child: Image(
+                    image: AssetImage("images/icons/vehicles/sports_bike_2.png"),
+                    width: 80,
+                  ),
+                ),
+                value: "images/icons/vehicles/sports_bike_2.png"
+            ),
+
+            DropdownMenuItem(
+                child: Center(
+                  child: Image(
+                    image: AssetImage("images/icons/vehicles/big_scooter_1.png"),
+                    width: 80,
+                  ),
+                ),
+                value: "images/icons/vehicles/big_scooter_1.png"
+            ),
+
+            DropdownMenuItem(
+                child: Center(
+                  child: Image(
+                    image: AssetImage("images/icons/vehicles/cross_bike_1.png"),
+                    width: 80,
+                  ),
+                ),
+                value: "images/icons/vehicles/cross_bike_1.png"
+            ),
+
+          ],
+          onChanged: (content) {},
+          // ignore: missing_return
+          validator: (String value){
+            if(value.isEmpty){
+              return 'Icon URL is required';
+            }
+          },
+          onSaved: (String value) {
+            _vehicle["iconURL"] = value;
+          },
+        )
+      ),
+    );
   }
 
   Widget _buildIconURLField() {
@@ -160,17 +281,38 @@ class _InputFormState extends State<InputForm> {
       ),
       child: Padding(
         padding: EdgeInsets.only(left: 15, right: 15, top: 2, bottom: 2),
-        child: TextFormField(
+        child: DropdownButtonFormField(
           style: TextStyle(
             color: Colors.blueGrey[900],
           ),
           decoration: InputDecoration(
+            prefixIcon: Icon(Icons.input, color: Colors.blueGrey),
             border: InputBorder.none,
-            labelText: "Type",
+            labelText: "Vehicle type",
             labelStyle: TextStyle(
                 color: Colors.blueGrey[600]
             ),
           ),
+            iconSize: 0,
+            dropdownColor: Colors.blueGrey[50],
+            items: [
+
+              DropdownMenuItem(
+              child: Center(
+                child: Text("Bike"),
+              ),
+                    value: "Bike"
+                ),
+
+              DropdownMenuItem(
+                  child: Center(
+                    child: Text("Car"),
+                  ),
+                  value: "Car"
+              ),
+
+          ],
+          onChanged: (content) {},
           // ignore: missing_return
           validator: (String value){
             if(value.isEmpty){
@@ -198,6 +340,7 @@ class _InputFormState extends State<InputForm> {
         color: Colors.blueGrey[900],
       ),
       decoration: InputDecoration(
+        prefixIcon: Icon(Icons.swap_horiz, color: Colors.blueGrey),
           border: InputBorder.none,
           labelText: "Mileage",
         labelStyle: TextStyle(
@@ -209,7 +352,7 @@ class _InputFormState extends State<InputForm> {
         if(value.isEmpty){
           return 'Mileage is required';
         }
-        if(!isNumeric(value)){
+        if(double.parse(value, (e) => null) == null){
           return 'Mileage must be a number';
         }
       },
@@ -233,6 +376,7 @@ class _InputFormState extends State<InputForm> {
         color: Colors.blueGrey[900],
       ),
       decoration: InputDecoration(
+          prefixIcon: Icon(Icons.calendar_today, color: Colors.blueGrey),
           border: InputBorder.none,
           labelText: "Year",
         labelStyle: TextStyle(
@@ -244,7 +388,7 @@ class _InputFormState extends State<InputForm> {
         if(value.isEmpty){
           return 'Year is required';
         }
-        if(!isNumeric(value)){
+        if(double.parse(value, (e) => null) == null){
           return 'Year must be a number';
         }
       },
@@ -268,6 +412,7 @@ class _InputFormState extends State<InputForm> {
         color: Colors.blueGrey[900],
       ),
       decoration: InputDecoration(
+        prefixIcon: Icon(Icons.text_fields, color: Colors.blueGrey),
           border: InputBorder.none,
           labelText: "License Plate",
         labelStyle: TextStyle(
@@ -300,6 +445,7 @@ class _InputFormState extends State<InputForm> {
         color: Colors.blueGrey[900],
       ),
       decoration: InputDecoration(
+        prefixIcon: Icon(Icons.settings_input_composite, color: Colors.blueGrey),
           border: InputBorder.none,
           labelText: "Displacement",
         labelStyle: TextStyle(
@@ -311,7 +457,7 @@ class _InputFormState extends State<InputForm> {
         if(value.isEmpty){
           return 'Displacement is required';
         }
-        if(!isNumeric(value)){
+        if(double.parse(value, (e) => null) == null){
           return 'Displacement must be a number';
         }
       },
@@ -335,6 +481,7 @@ class _InputFormState extends State<InputForm> {
         color: Colors.blueGrey[900],
       ),
       decoration: InputDecoration(
+        prefixIcon: Icon(Icons.settings_input_component, color: Colors.blueGrey),
           border: InputBorder.none,
           labelText: "Cylinders",
         labelStyle: TextStyle(
@@ -347,7 +494,7 @@ class _InputFormState extends State<InputForm> {
         if(value.isEmpty){
           return 'Cylinders is required';
         }
-        if(!isNumeric(value)){
+        if(double.parse(value, (e) => null) == null){
           return 'Cylinders must be a number';
         }
       },
@@ -371,6 +518,7 @@ class _InputFormState extends State<InputForm> {
         color: Colors.blueGrey[900],
       ),
       decoration: InputDecoration(
+          prefixIcon: Icon(Icons.local_gas_station, color: Colors.blueGrey),
           border: InputBorder.none,
           labelText: "Fuel Type",
         labelStyle: TextStyle(
@@ -403,6 +551,7 @@ class _InputFormState extends State<InputForm> {
         color: Colors.blueGrey[900],
       ),
       decoration: InputDecoration(
+        prefixIcon: Icon(Icons.battery_unknown, color: Colors.blueGrey),
           border: InputBorder.none,
           labelText: "Consumption",
         labelStyle: TextStyle(
@@ -439,7 +588,7 @@ class _InputFormState extends State<InputForm> {
 
                 _buildModelField(),
                 _buildNameField(),
-                _buildIconURLField(),
+                _buildIconURLField2(),
                 _buildTypeField(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

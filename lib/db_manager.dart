@@ -1,4 +1,4 @@
-import 'dart:core';
+// import 'dart:core';
 
 import 'package:my_bike/models/component.dart';
 import 'package:my_bike/models/vehicle.dart';
@@ -50,7 +50,8 @@ Future<Database> initializeDB() async {
                 'vehicleId INTEGER NOT NULL, '
                 'name TEXT, '
                 'iconURL TEXT, '
-                'mileageLifeSpan INTEGER, '
+                'startMileage INTEGER, '
+                'mileageLifespan INTEGER, '
                 'FOREIGN KEY (vehicleId) REFERENCES Vehicle(id))'
             );
       });
@@ -63,8 +64,8 @@ Future<Vehicle> insertVehicleIntoDB(Database database, Vehicle vehicle) async {
   return vehicle;
 }
 
-Future<Component> insertComponent (Database database, Component component) async {
-  component.id = await database.insert("Component", component.toMap());
+Future<Component> insertComponentIntoDB (Database database, Component component) async {
+  component.id = await database.insert("Components", component.toMap());
   return component;
 }
 
@@ -87,11 +88,12 @@ Future<List<Vehicle>> getVehicles(Database database) async {
   return vehicleList;
 }
 
-Future<List<Component>> getComponents(Database database) async {
+Future<List<Component>> getComponents(Database database, int vehicleId) async {
 
   var components = await database.query(
-      "Component",
-      columns: ["id", "vehicleId", "name", "iconURL", "mileageLifeSpan"]
+      "Components",
+      columns: ["id", "vehicleId", "name", "iconURL", "startMileage", "mileageLifespan"],
+      where: '"vehicleId" = $vehicleId',
   );
   List<Component> componentList = List<Component>();
 

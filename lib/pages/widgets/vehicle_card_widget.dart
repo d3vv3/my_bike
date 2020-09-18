@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:my_bike/models/vehicle.dart';
+import 'package:my_bike/pages/widgets/components_page_widget.dart';
 
 
 class VehicleCard extends StatelessWidget {
@@ -25,7 +25,16 @@ class VehicleCard extends StatelessWidget {
           customBorder: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
-          onTap: (){ print("Card Clicked"); },
+          onTap: () async {
+            var navigationResult = await Navigator.push(context, new MaterialPageRoute(builder: (context) => ComponentsPage(vehicle: vehicle)));
+
+            if (navigationResult == true) {
+              print("Returned nice");
+            }
+            else {
+              print("Backed");
+            }
+          },
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Center(
@@ -36,10 +45,11 @@ class VehicleCard extends StatelessWidget {
                     flex: 2,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15, right: 15),
-                      child: CachedNetworkImage(
-                          placeholder: (context, url) => CircularProgressIndicator(),
-                          imageUrl: "${vehicle.iconURL}",
-                          width: 120),
+                      child: Center(
+                        child: Image(
+                            image: AssetImage("${vehicle.iconURL}"),
+                            width: 120),
+                      ),
                     ),
                   ),
                   Expanded(
