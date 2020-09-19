@@ -83,7 +83,17 @@ class _ComponentsPageState extends State<ComponentsPage> {
                 ? <Widget>[
 
                   //_buildVehicleCard(_garage[0])
-                  for(var component in components) ComponentCard(component, widget.vehicle)
+                  for(var component in components) Dismissible(
+                      key: UniqueKey(),
+                      onDismissed: (direction) async {
+                        var result = await removeComponentFromDB(_database, component);
+                        print(result);
+                        this.setState(() {
+                          components.remove(component);
+                        });
+                      },
+                      child: ComponentCard(component, widget.vehicle)
+                  )
 
                   ]
                 : <Widget>[Container()]

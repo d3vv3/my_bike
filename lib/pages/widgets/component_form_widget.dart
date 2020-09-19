@@ -27,7 +27,7 @@ class ComponentInputWidget extends StatelessWidget {
             Navigator.pop(context, false);
           },
         ),
-        title: Text("New bike",
+        title: Text("New component",
           style: TextStyle(fontSize: 28.0,
               fontWeight: FontWeight.bold,
               color: Colors.blueGrey[900]),

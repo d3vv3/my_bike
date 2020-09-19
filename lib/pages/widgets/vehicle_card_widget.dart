@@ -5,20 +5,21 @@ import 'package:my_bike/pages/widgets/components_page_widget.dart';
 
 class VehicleCard extends StatelessWidget {
 
-  VehicleCard(this.vehicle);
+  VehicleCard(this.vehicle, this.database);
 
   final Vehicle vehicle;
+  final database;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 150,
       child: Card(
+        margin: EdgeInsets.only(left: 24, right: 24, top: 10, bottom: 10),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
         elevation: 5,
-        margin: EdgeInsets.only(left: 24, right: 24, top: 10, bottom: 10),
         child: InkWell(
           splashColor: Colors.redAccent,
           highlightColor: Colors.blueGrey[100],

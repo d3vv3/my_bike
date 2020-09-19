@@ -52,7 +52,7 @@ Future<Database> initializeDB() async {
                 'iconURL TEXT, '
                 'startMileage INTEGER, '
                 'mileageLifespan INTEGER, '
-                'FOREIGN KEY (vehicleId) REFERENCES Vehicle(id))'
+                'FOREIGN KEY (vehicleId) REFERENCES Vehicle(id) ON DELETE CASCADE)'
             );
       });
   return database;
@@ -64,9 +64,19 @@ Future<Vehicle> insertVehicleIntoDB(Database database, Vehicle vehicle) async {
   return vehicle;
 }
 
+Future<int> removeVehicleFromDB(Database database, Vehicle vehicle) async {
+  var result = await database.delete("Vehicle", where: 'id = ?', whereArgs: [vehicle.id]);
+  return result;
+}
+
 Future<Component> insertComponentIntoDB (Database database, Component component) async {
   component.id = await database.insert("Components", component.toMap());
   return component;
+}
+
+Future<int> removeComponentFromDB(Database database, Component component) async {
+  var result = await database.delete("Components", where: 'id = ?', whereArgs: [component.id]);
+  return result;
 }
 
 Future<List<Vehicle>> getVehicles(Database database) async {

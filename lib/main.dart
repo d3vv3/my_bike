@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.blueGrey[900]),
       ),
       ),
-      body: (_garage != null) ? GaragePage(garage: _garage) : null,
+      body: (_garage != null) ? GaragePage(database: _database, garage: _garage) : null,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           var navigationResult = await Navigator.push(context, new MaterialPageRoute(builder: (context) => VehicleInputWidget()));

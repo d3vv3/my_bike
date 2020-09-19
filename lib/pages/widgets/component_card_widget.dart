@@ -138,5 +138,8 @@ int calcMileageLeft(vehicle, component) {
   if (result < 0) {
     return 0;
   }
+  print("Vehicle mileage: ${vehicle.mileage}");
+  print("Component lifespan: ${component.mileageLifespan}");
+  print("Mileage: ${component.startMileage}");
   return result;
 }
