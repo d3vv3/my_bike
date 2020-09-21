@@ -19,3 +19,4 @@ Keep track of when your oil, tires, brakes, chain and others need to be replaced
 
 1. Allow users to update vehicle mileage
 2. Allow users to reset components
+3. Finish sidebar
