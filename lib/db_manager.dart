@@ -65,8 +65,15 @@ Future<Vehicle> insertVehicleIntoDB(Database database, Vehicle vehicle) async {
 }
 
 Future<int> removeVehicleFromDB(Database database, Vehicle vehicle) async {
-  var result = await database.delete("Vehicle", where: 'id = ?', whereArgs: [vehicle.id]);
+  var result = await database.delete("Vehicle",
+      where: 'id = ?', whereArgs: [vehicle.id]);
   return result;
+}
+
+Future<Vehicle> updateVehicleMileage(Database database, Vehicle vehicle) async {
+  vehicle.mileage = await database.update("Vehicle", vehicle.toMap(),
+      where: 'id = ?', whereArgs: [vehicle.id]);
+  return vehicle;
 }
 
 Future<Component> insertComponentIntoDB (Database database, Component component) async {

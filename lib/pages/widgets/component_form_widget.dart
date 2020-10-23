@@ -191,38 +191,6 @@ class _InputFormState extends State<InputForm> {
     );
   }
 
-  Widget _buildIconURLField() {
-    return Container(
-      margin: EdgeInsets.only(top: 5, bottom: 5),
-      decoration: BoxDecoration(
-        color: Colors.blueGrey[100],
-        borderRadius: new BorderRadius.circular(10.0),
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(left: 15, right: 15, top: 2, bottom: 2),
-        child: TextFormField(
-          style: TextStyle(
-            color: Colors.blueGrey[900],
-          ),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            labelText: "Icon URL",
-            labelStyle: TextStyle(
-                color: Colors.blueGrey[600]
-            ),
-          ),
-          // ignore: missing_return
-          validator: (String value){
-            if(value.isEmpty){
-              return 'Icon URL is required';
-            }
-          },
-          onSaved: (String value) {
-            _component["iconURL"] = value;
-          },
-        ),),);
-  }
-
   Widget _buildStartMileageField() {
     return Container(
         margin: EdgeInsets.only(top: 5, bottom: 5),
@@ -233,6 +201,7 @@ class _InputFormState extends State<InputForm> {
         child: Padding(
         padding: EdgeInsets.only(left: 15, right: 15, top: 2, bottom: 2),
     child: TextFormField(
+      keyboardType: TextInputType.number,
       style: TextStyle(
         color: Colors.blueGrey[900],
       ),
@@ -269,6 +238,7 @@ class _InputFormState extends State<InputForm> {
         child: Padding(
         padding: EdgeInsets.only(left: 15, right: 15, top: 2, bottom: 2),
     child: TextFormField(
+      keyboardType: TextInputType.number,
       style: TextStyle(
         color: Colors.blueGrey[900],
       ),

@@ -134,6 +134,9 @@ int calcMileageLeft(vehicle, component) {
   if (component.mileageLifespan == 0) {
     return 0;
   }
+  if (component.startMileage > vehicle.mileage) {
+    return 0;
+  }
   var result = component.mileageLifespan -(vehicle.mileage - component.startMileage);
   if (result < 0) {
     return 0;
@@ -141,5 +144,6 @@ int calcMileageLeft(vehicle, component) {
   print("Vehicle mileage: ${vehicle.mileage}");
   print("Component lifespan: ${component.mileageLifespan}");
   print("Mileage: ${component.startMileage}");
+  print("Left: $result");
   return result;
 }

@@ -37,7 +37,7 @@ class _GaragePageState extends State<GaragePage> {
                       widget.garage.remove(vehicle);
                     });
                   },
-                  child: VehicleCard(vehicle, database))
+                  child: VehicleCard(vehicle: vehicle, database: database))
 
             ]
       ),
